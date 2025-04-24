@@ -1,0 +1,48 @@
+import React, { useState } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
+
+export default function EchoHearsHome() {
+  const [grade, setGrade] = useState(null);
+
+  const grades = [7, 8, 9, 10, 11, 12];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-6">
+      <h1 className="text-4xl font-bold text-center mb-8">EchoHears</h1>
+      <p className="text-center text-lg mb-4">Learn English the fun way — through listening, playing, and practicing!</p>
+
+      {!grade ? (
+        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-6 gap-4 justify-center">
+          {grades.map((g) => (
+            <motion.div whileHover={{ scale: 1.05 }} key={g}>
+              <Button onClick={() => setGrade(g)} className="w-full text-lg p-6 rounded-2xl shadow-md bg-blue-600 text-white">
+                Grade {g}
+              </Button>
+            </motion.div>
+          ))}
+        </div>
+      ) : (
+        <div className="mt-6">
+          <Button onClick={() => setGrade(null)} className="mb-4">⬅ Back to Grades</Button>
+          <h2 className="text-2xl font-semibold mb-2">Quarter 1 Activities for Grade {grade}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Card className="bg-white p-4 rounded-2xl shadow hover:shadow-lg">
+              <CardContent>
+                <h3 className="text-xl font-bold">🎧 Formal vs Informal Speech</h3>
+                <p className="mt-2">Listen and sort the sentences into formal or informal categories.</p>
+              </CardContent>
+            </Card>
+            <Card className="bg-white p-4 rounded-2xl shadow hover:shadow-lg">
+              <CardContent>
+                <h3 className="text-xl font-bold">🧩 Rearrange the Dialogue</h3>
+                <p className="mt-2">Drag-and-drop the lines to form a logical conversation.</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
